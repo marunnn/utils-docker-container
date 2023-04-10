@@ -1,0 +1,6 @@
+services:
+  ubuntu-with-user:
+    image: ubuntu-with-user:latest
+    network_mode: "host"
+    stdin_open: true
+    tty: true
