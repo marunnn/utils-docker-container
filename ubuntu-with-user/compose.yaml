@@ -1,6 +1,7 @@
 services:
   ubuntu-with-user:
     image: ubuntu-with-user:latest
+    container_name: ubuntu-with-user-container
     network_mode: "host"
     stdin_open: true
     tty: true
