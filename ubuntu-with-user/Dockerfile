@@ -6,14 +6,21 @@ RUN apt update && \
     apt install -y curl && \
     apt install -y git
 
-ARG USERNAME=user
-ARG GROUPNAME=user
 ARG UID=1000
 ARG GID=1000
-ARG PASSWORD=user
-RUN groupadd -g $GID $GROUPNAME && \
-    useradd -m -s /bin/bash -u $UID -g $GID -G sudo $USERNAME && \
-    echo $USERNAME:$PASSWORD | chpasswd && \
-    echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-USER $USERNAME
-WORKDIR /home/$USERNAME/
+ARG UNAME=user
+ARG GNAME=user
+ARG PW=user
+
+ENV UID=${UID} \
+    GID=${GID} \
+    UNAME=${UNAME} \
+    GNAME=${GNAME}
+
+RUN groupadd -g $GID $GNAME && \
+    useradd -m -s /bin/bash -u $UID -g $GID -G sudo $UNAME && \
+    echo $UNAME:$PW | chpasswd && \
+    echo "$UNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+USER $UNAME
+WORKDIR /home/$UNAME

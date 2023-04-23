@@ -1,8 +1,17 @@
 services:
   ubuntu-with-user:
     image: ubuntu-with-user:latest
-    build: .
+    build:
+      context: .
+      args:
+        UID: $UID
+        GID: $GID
+        UNAME: $UNAME
+        GNAME: $GNAME
+        PW: $PW
     container_name: ubuntu-with-user-container
     network_mode: "host"
     stdin_open: true
     tty: true
+    user: $UNAME:$GNAME
+    working_dir: /home/$UNAME
