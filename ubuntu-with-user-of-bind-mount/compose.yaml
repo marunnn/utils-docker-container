@@ -1,0 +1,23 @@
+services:
+  ubuntu-with-user-of-bind-mount:
+    image: ubuntu-with-user:latest
+    build:
+      context: ../ubuntu-with-user/
+      args:
+        UID: $UID
+        GID: $GID
+        UNAME: $UNAME
+        GNAME: $GNAME
+        PW: $PW
+    container_name: ubuntu-with-user-of-bind-mount-container
+    network_mode: "host"
+    stdin_open: true
+    tty: true
+    user: $UNAME:$GNAME
+    working_dir: /home/$UNAME
+    volumes:
+      - type: bind
+        source: $SOURCE
+        target: /home/$UNAME/bind-mount
+        bind:
+          create_host_path: true
