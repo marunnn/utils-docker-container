@@ -25,3 +25,9 @@ RUN groupadd -g ${GID} ${GNAME} && \
 
 USER ${UNAME}
 WORKDIR /home/${UNAME}
+
+# homebrew install
+RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && \
+    (echo; echo '# homebrew'; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/${UNAME}/.profile && \
+    (echo; echo '# homebrew'; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/${UNAME}/.bashrc && \
+    sudo apt-get install -y build-essential
