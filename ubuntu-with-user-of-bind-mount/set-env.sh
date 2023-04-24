@@ -5,18 +5,18 @@ if [ 2 -lt $# ]; then
 	exit 1
 fi
 
-rm -f ./.env
-
 SOURCE=../../bind-mount/ubuntu-with-user-of-bind-mount
 mkdir -p $SOURCE
 
 touch .env
-echo "SOURCE=$SOURCE" >> .env
-echo "UID=$(id -u $USER)" >> .env
-echo "GID=$(id -g $USER)" >> .env
-echo "UNAME=${1:-user}" >> .env
-echo "GNAME=${1:-user}" >> .env
-echo "PW=${2:-user}" >> .env
+cat << EOF > .env
+SOURCE=$SOURCE
+UID=$(id -u $USER)
+GID=$(id -g $USER)
+UNAME=${1:-user}
+GNAME=${1:-user}
+PW=${2:-user}
+EOF
 
 echo "set .env"
 echo "-----"
