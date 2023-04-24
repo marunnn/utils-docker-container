@@ -18,10 +18,10 @@ ENV UID=${UID} \
     UNAME=${UNAME} \
     GNAME=${GNAME}
 
-RUN groupadd -g $GID $GNAME && \
-    useradd -m -s /bin/bash -u $UID -g $GID -G sudo $UNAME && \
-    echo $UNAME:$PW | chpasswd && \
-    echo "$UNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+RUN groupadd -g ${GID} ${GNAME} && \
+    useradd -m -s /bin/bash -u ${UID} -g ${GID} -G sudo ${UNAME} && \
+    echo ${UNAME}:${PW} | chpasswd && \
+    echo "${UNAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-USER $UNAME
-WORKDIR /home/$UNAME
+USER ${UNAME}
+WORKDIR /home/${UNAME}
