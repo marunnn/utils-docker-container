@@ -1,10 +1,11 @@
 FROM ubuntu:latest
 
-RUN apt-get update && apt-get install -y sudo
-RUN apt update && \
-    apt install -y vim && \
-    apt install -y curl && \
-    apt install -y git
+RUN apt-get update && \
+    apt-get install -y \
+    sudo \
+    vim \
+    curl \
+    git
 
 ARG UID=1000
 ARG GID=1000
