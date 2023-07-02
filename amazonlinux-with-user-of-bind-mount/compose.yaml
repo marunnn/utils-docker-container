@@ -1,0 +1,21 @@
+services:
+  amazonlinux-with-user-of-bind-mount:
+    image: amazonlinux-with-user:latest
+    build:
+      context: .
+      args:
+        AMAZONLINUX_VERSION: $AMAZONLINUX_VERSION
+        UNAME: $UNAME
+        PW: $PW
+    container_name: amazonlinux-with-user-of-bind-mount-container
+    network_mode: "host"
+    stdin_open: true
+    tty: true
+    user: $UNAME
+    working_dir: /home/$UNAME
+    volumes:
+      - type: bind
+        source: $SOURCE
+        target: /home/$UNAME/bind-mount
+        bind:
+          create_host_path: true
