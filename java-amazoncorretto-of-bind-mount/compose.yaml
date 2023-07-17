@@ -1,0 +1,14 @@
+services:
+  java-amazoncorretto-of-bind-mount:
+    image: amazoncorretto:$JAVA_VERSION
+    container_name: java-amazoncorretto-of-bind-mount-container
+    network_mode: "host"
+    stdin_open: true
+    tty: true
+    working_dir: /bind-mount
+    volumes:
+      - type: bind
+        source: $SOURCE
+        target: /bind-mount
+        bind:
+          create_host_path: true
