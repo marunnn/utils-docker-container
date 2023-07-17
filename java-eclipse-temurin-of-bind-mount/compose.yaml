@@ -1,7 +1,7 @@
 services:
-  java-of-bind-mount:
+  java-eclipse-temurin-of-bind-mount:
     image: eclipse-temurin:$JAVA_VERSION
-    container_name: java-of-bind-mount-container
+    container_name: java-eclipse-temurin-of-bind-mount-container
     network_mode: "host"
     stdin_open: true
     tty: true

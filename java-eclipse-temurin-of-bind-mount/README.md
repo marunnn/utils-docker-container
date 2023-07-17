@@ -1,12 +1,11 @@
-# **java-of-bind-mount**
+# **java-eclipse-temurin-of-bind-mount**
 # 概要
-Javaの開発環境をDockerコンテナで作成する。(バインドマウントあり)  
+Java(eclipse-temurin)の開発環境をDockerコンテナで作成する。(バインドマウントあり)  
 ※Javaのバージョンはコンテナ作成時に指定する。  
 <br>
 バインドマウント先
-- ホスト：${リポジトリをクローンするディレクトリ}/bind-mount/java-of-bind-mount
+- ホスト：${リポジトリをクローンするディレクトリ}/bind-mount/java-eclipse-temurin-of-bind-mount
 - コンテナ：/bind-mount  
-<br><br>
 
 # 前提条件
 - 以下がインストール済みであること。
@@ -14,7 +13,6 @@ Javaの開発環境をDockerコンテナで作成する。(バインドマウン
     - Docker Engine
     - Docker Compose
 - 作業の実施場所がLinux上であること。(/mnt/c配下ではないこと。)
-<br><br>
 
 # 使用手順
 ## リポジトリのクローン
@@ -23,7 +21,7 @@ git clone https://github.com/marunnn/utils-docker-container.git
 ```
 ## ディレクトリ移動
 ```console
-cd ./utils-docker-container/java-of-bind-mount/
+cd ./utils-docker-container/java-eclipse-temurin-of-bind-mount/
 ```
 ## 変数の設定
 ### 権限の変更
@@ -50,52 +48,12 @@ docker compose up -d
 ## コンテナに入る
 ### docker composeコマンドを使用
 ```console
-docker compose exec -it java-of-bind-mount-container /bin/bash
+docker compose exec -it java-eclipse-temurin-of-bind-mount /bin/bash
 ```
 ### dockerコマンドを使用
 ```console
-docker exec -it java-of-bind-mount-container /bin/bash
+docker exec -it java-eclipse-temurin-of-bind-mount-container /bin/bash
 ```
-<br><br>
 
 # 備考
-## Dockerの状態確認
-```console
-service docker status
-```
-結果例
-```console
-$ service docker status
- * Docker is running
-```
-## Dockerを停止
-```console
-sudo service docker stop
-```
-## docker composeコマンド
-※java-of-bind-mountディレクトリ配下で実行。
-### 起動中コンテナの状態確認  
-```console
-docker compose ps
-```
-### コンテナの停止と削除  
-```console
-docker compose down
-```
-### コンテナの起動
-```console
-docker compose start
-```
-### コンテナの停止
-```console
-docker compose stop
-```
-## dockerコマンド
-### コンテナの起動
-```console
-docker start java-of-bind-mount-container
-```
-### コンテナの停止
-```console
-docker stop java-of-bind-mount-container
-```
+その他、Dockerで使用する基本的なコマンドについては、[こちらの"備考 > Dockerで使用する基本的なコマンド"](../README.md)を参照。

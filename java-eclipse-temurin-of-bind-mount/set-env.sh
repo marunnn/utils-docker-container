@@ -5,7 +5,7 @@ if [ 1 -lt $# ]; then
 	exit 1
 fi
 
-SOURCE=../../bind-mount/java-of-bind-mount
+SOURCE=../../bind-mount/java-eclipse-temurin-of-bind-mount
 mkdir -p $SOURCE
 
 touch .env

@@ -60,7 +60,7 @@ docker compose up -d
 ## コンテナに入る
 ### docker composeコマンドを使用
 ```console
-docker compose exec -it postgresql-of-bind-mount-container /bin/bash
+docker compose exec -it postgresql-of-bind-mount /bin/bash
 ```
 ### dockerコマンドを使用
 ```console
