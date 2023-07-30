@@ -1,0 +1,19 @@
+services:
+  nginx-of-bind-mount:
+    image: nginx:$VERSION
+    container_name: nginx-$VERSION-of-bind-mount-container
+    network_mode: "host"
+    stdin_open: true
+    tty: true
+    working_dir: /$UNAME
+    volumes:
+      - type: bind
+        source: $SOURCE_DATA
+        target: /data
+        bind:
+          create_host_path: true
+      - type: bind
+        source: $SOURCE_WORK
+        target: /$UNAME/bind-mount
+        bind:
+          create_host_path: true
