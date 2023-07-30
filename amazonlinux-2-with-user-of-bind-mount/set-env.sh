@@ -5,13 +5,13 @@ if [ 3 -lt $# ]; then
 	exit 1
 fi
 
-SOURCE=../../bind-mount/amazonlinux-with-user-of-bind-mount
+SOURCE=../../bind-mount/amazonlinux-2-with-user-of-bind-mount
 mkdir -p $SOURCE
 
 touch .env
 cat << EOF > .env
 SOURCE=$SOURCE
-AMAZONLINUX_VERSION=${1:-latest}
+AMAZONLINUX_2_WITH_USER_VERSION=${1:-latest}
 UNAME=${2:-user}
 PW=${3:-user}
 EOF

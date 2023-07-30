@@ -1,13 +1,13 @@
 services:
-  amazonlinux-with-user-of-bind-mount:
-    image: amazonlinux-with-user:latest
+  amazonlinux-2-with-user-of-bind-mount:
+    image: amazonlinux-2-with-user:$AMAZONLINUX_2_WITH_USER_VERSION
     build:
       context: .
       args:
-        AMAZONLINUX_VERSION: $AMAZONLINUX_VERSION
+        AMAZONLINUX_VERSION: 2
         UNAME: $UNAME
         PW: $PW
-    container_name: amazonlinux-with-user-of-bind-mount-container
+    container_name: amazonlinux-2-with-user-of-bind-mount-container
     network_mode: "host"
     stdin_open: true
     tty: true
