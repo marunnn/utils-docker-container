@@ -9,7 +9,8 @@ RUN yum update -y && \
     sudo \
     vim \
     curl \
-    git
+    git \
+    tar
 
 ARG UNAME=user
 ARG PW=user
