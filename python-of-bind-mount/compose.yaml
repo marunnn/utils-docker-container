@@ -1,0 +1,18 @@
+services:
+  python-of-bind-mount:
+    image: python-of-bind-mount:${PYTHON_VERSION}
+    build:
+      context: ./
+      args:
+        PYTHON_VERSION: ${PYTHON_VERSION}
+    container_name: python-of-bind-mount-container
+    network_mode: host
+    stdin_open: true
+    tty: true
+    working_dir: ${TARGET_DIR}
+    volumes:
+      - type: bind
+        source: ${SOURCE_DIR}
+        target: ${TARGET_DIR}
+        bind:
+          create_host_path: true
