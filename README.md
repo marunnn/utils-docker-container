@@ -21,16 +21,16 @@ service docker status
 $ service docker status
  * Docker is running
 ```
-#### Dockerを起動
+#### Dockerの起動
 ```console
 sudo service docker start
 ```
-#### Dockerを停止
+#### Dockerの停止
 ```console
 sudo service docker stop
 ```
 ### docker composeコマンド
-※対象のcompose.yamlがあるディレクトリ配下で実行。
+※対象のcompose.yamlがあるディレクトリで実行。
 #### 起動中コンテナの状態確認  
 ```console
 docker compose ps
