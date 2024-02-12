@@ -3,9 +3,8 @@
 Pythonの開発環境をDockerコンテナで作成する。(バインドマウントあり。)  
 ※Pythonのバージョンはコンテナ作成時に指定する。
 ## バインドマウント先
-- 作業ディレクトリ
-    - ホスト： `utils-docker-container/python-of-bind-mount/bind-mount`
-    - コンテナ： `/root/bind-mount`
+- ホスト： `utils-docker-container/python-of-bind-mount/bind-mount`
+- コンテナ： `/root/bind-mount`
 
 # 前提条件
 - 以下がインストール済みであること。
@@ -33,7 +32,7 @@ chmod 744 ./set-env.sh
 - 第1引数：Pythonのバージョン(デフォルト： `3.12.2-slim-bullseye` )  
   ※コンテナのイメージタグで使用するため、[Docker Hub](https://hub.docker.com/)に記載のタグであれば何を引数に指定しても良い。
 
-次は、Python 3.12.2-slim-bullseyeの開発環境を構築するときの例になる。
+次はPython 3.12.2-slim-bullseyeの開発環境を構築するときの例になる。
 ```console
 sh ./set-env.sh 3.12.2-slim-bullseye
 ```

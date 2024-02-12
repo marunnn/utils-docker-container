@@ -1,14 +1,14 @@
 services:
   java-eclipse-temurin-of-bind-mount:
-    image: eclipse-temurin:$JAVA_VERSION
+    image: eclipse-temurin:${JAVA_VERSION}
     container_name: java-eclipse-temurin-of-bind-mount-container
-    network_mode: "host"
+    network_mode: host
     stdin_open: true
     tty: true
-    working_dir: /bind-mount
+    working_dir: /root
     volumes:
       - type: bind
-        source: $SOURCE
-        target: /bind-mount
+        source: ${SOURCE_DIR}
+        target: ${TARGET_DIR}
         bind:
           create_host_path: true

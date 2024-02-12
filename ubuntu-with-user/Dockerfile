@@ -1,33 +1,37 @@
-FROM ubuntu:latest
+ARG UBUNTU_VERSION=22.04
+FROM ubuntu:${UBUNTU_VERSION}
+
+ARG USER_ID=1000
+ARG GROUP_ID=1000
+ARG USER_NAME=user
+ARG GROUP_NAME=user
+ARG PW=user
+
+ENV USER_ID=${USER_ID} \
+    GROUP_ID=${GROUP_ID} \
+    USER_NAME=${USER_NAME} \
+    GROUP_NAME=${GROUP_NAME}
 
 RUN apt-get update && \
     apt-get install -y \
-    sudo \
-    vim \
+    build-essential \
     curl \
-    git
+    git \
+    sudo \
+    vim && \
+    apt-get autoremove -y && \
+    apt-get clean && \
+    rm -rf /usr/local/src/*
 
-ARG UID=1000
-ARG GID=1000
-ARG UNAME=user
-ARG GNAME=user
-ARG PW=user
+RUN groupadd -g ${GROUP_ID} ${GROUP_NAME} && \
+    useradd -m -s /bin/bash -u ${USER_ID} -g ${GROUP_ID} -G sudo ${USER_NAME} && \
+    echo ${USER_NAME}:${PW} | chpasswd && \
+    echo "${USER_NAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-ENV UID=${UID} \
-    GID=${GID} \
-    UNAME=${UNAME} \
-    GNAME=${GNAME}
-
-RUN groupadd -g ${GID} ${GNAME} && \
-    useradd -m -s /bin/bash -u ${UID} -g ${GID} -G sudo ${UNAME} && \
-    echo ${UNAME}:${PW} | chpasswd && \
-    echo "${UNAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-
-USER ${UNAME}
-WORKDIR /home/${UNAME}
+USER ${USER_NAME}
+WORKDIR /home/${USER_NAME}
 
 # homebrew install
 RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && \
-    (echo; echo '# homebrew'; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/${UNAME}/.profile && \
-    (echo; echo '# homebrew'; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/${UNAME}/.bashrc && \
-    sudo apt-get install -y build-essential
+    (echo; echo '# homebrew'; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/${USER_NAME}/.profile && \
+    (echo; echo '# homebrew'; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/${USER_NAME}/.bashrc

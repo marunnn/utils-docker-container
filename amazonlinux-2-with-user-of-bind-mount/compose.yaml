@@ -1,21 +1,20 @@
 services:
   amazonlinux-2-with-user-of-bind-mount:
-    image: amazonlinux-2-with-user:$AMAZONLINUX_2_WITH_USER_VERSION
+    image: amazonlinux-2-with-user:${AMAZONLINUX_2_WITH_USER_VERSION}
     build:
-      context: .
+      context: ./
       args:
-        AMAZONLINUX_VERSION: 2
-        UNAME: $UNAME
-        PW: $PW
+        USER_NAME: ${USER_NAME}
+        USER_PW: ${USER_PW}
     container_name: amazonlinux-2-with-user-of-bind-mount-container
-    network_mode: "host"
+    network_mode: host
     stdin_open: true
     tty: true
-    user: $UNAME
-    working_dir: /home/$UNAME
+    user: ${USER_NAME}
+    working_dir: /home/${USER_NAME}
     volumes:
       - type: bind
-        source: $SOURCE
-        target: /home/$UNAME/bind-mount
+        source: ${SOURCE_DIR}
+        target: ${TARGET_DIR}
         bind:
           create_host_path: true

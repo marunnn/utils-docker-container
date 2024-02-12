@@ -4,20 +4,21 @@ services:
     build:
       context: ../ubuntu-with-user/
       args:
-        UID: $UID
-        GID: $GID
-        UNAME: $UNAME
-        GNAME: $GNAME
-        PW: $PW
+        UBUNTU_VERSION: ${UBUNTU_VERSION}
+        USER_ID: ${USER_ID}
+        GROUP_ID: ${GROUP_ID}
+        USER_NAME: ${USER_NAME}
+        GROUP_NAME: ${GROUP_NAME}
+        PW: ${PW}
     container_name: ubuntu-with-user-of-bind-mount-container
-    network_mode: "host"
+    network_mode: host
     stdin_open: true
     tty: true
-    user: $UNAME:$GNAME
-    working_dir: /home/$UNAME
+    user: ${USER_NAME}:${GROUP_NAME}
+    working_dir: /home/${USER_NAME}
     volumes:
       - type: bind
-        source: $SOURCE
-        target: /home/$UNAME/bind-mount
+        source: ${SOURCE_DIR}
+        target: ${TARGET_DIR}
         bind:
           create_host_path: true

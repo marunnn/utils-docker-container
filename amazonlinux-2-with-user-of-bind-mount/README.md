@@ -1,16 +1,15 @@
 # **amazonlinux-2-with-user-of-bind-mount**
 # 概要
-Amazon Linux 2と同等の環境をDockerコンテナで作成する。(バインドマウントあり)  
-※試験など、新規のAmazon Linux 2環境が必要なときに使用する目的。  
-<br>
-バインドマウント先
-- ホスト：${リポジトリをクローンするディレクトリ}/bind-mount/amazonlinux-2-with-user-of-bind-mount
-- コンテナ：/home/${UNAME}/bind-mount  
-  ※\${UNAME}は任意に設定可。(以下の"使用手順 > 変数の設定"を参照。)
+Amazon Linux 2の環境をDockerコンテナで作成する。(バインドマウントあり。)  
+※試験など、新規のAmazon Linux 2環境が必要なときに使用する目的。
+## バインドマウント先
+- ホスト： `utils-docker-container/amazonlinux-2-with-user-of-bind-mount/bind-mount`
+- コンテナ： `/home/${USER_NAME}/bind-mount`  
+  ※ `${USER_NAME}` は任意に設定可。(以下の"使用手順 > 変数の設定"を参照。)
 
 # 前提条件
 - 以下がインストール済みであること。
-    - WSL2(Ubuntu)
+    - WSL 2(Ubuntu)
     - Docker Engine
     - Docker Compose
 - 作業の実施場所がLinux上であること。(/mnt/c配下ではないこと。)
@@ -31,31 +30,20 @@ chmod 744 ./set-env.sh
 ```
 ### シェルスクリプト実行
 引数により以下の設定ができる。(特に気にしない場合は引数なしで実行する。)
-- 第1引数：Dockerfileで生成するimageタグ(デフォルト：latest)  
-- 第2引数：コンテナのユーザ名(デフォルト：user)
-- 第3引数：コンテナのユーザパスワード(デフォルト：user)
+- 第1引数：Dockerfileで生成するimageタグ(デフォルト： `latest` )  
+- 第2引数：コンテナのユーザ名(デフォルト： `user` )
+- 第3引数：コンテナのユーザパスワード(デフォルト： `user` )
 
-次は、Dockerfileで生成するimageタグが `v01` 、ユーザとパスワードが `ec2-user` の開発環境を構築するときの例になる。
+次はDockerfileで生成するimageタグが `v01` 、ユーザとパスワードが `ec2-user` の開発環境を構築するときの例になる。
 ```console
 sh ./set-env.sh v01 ec2-user ec2-user
 ```
-## Dockerを起動
-```console
-sudo service docker start
-```
-## コンテナの作成と起動
-```console
-docker compose up -d
-```
-## コンテナに入る
-### docker composeコマンドを使用
-```console
-docker compose exec -it amazonlinux-2-with-user-of-bind-mount-container /bin/bash
-```
-### dockerコマンドを使用
-```console
-docker exec -it amazonlinux-2-with-user-of-bind-mount-container /bin/bash
-```
+## Dockerコンテナの使用
+[こちらの"備考 > Dockerで使用する基本的なコマンド"](../README.md)に記載されている下記の項目を実施する。
+- serviceコマンド > Dockerの起動
+- docker composeコマンド > コンテナの作成と起動
+- docker composeコマンド > コンテナに入る  
+  ※"dockerコマンド > コンテナに入る"でも良い。
 
 # 備考
-その他、Dockerで使用する基本的なコマンドについては、[こちらの"備考 > Dockerで使用する基本的なコマンド"](../README.md)を参照。
+その他、Dockerで使用する基本的なコマンドについては、[こちらの"備考 > Dockerで使用する基本的なコマンド"](../README.md)を参照する。

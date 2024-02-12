@@ -1,25 +1,24 @@
-ARG AMAZONLINUX_VERSION=2
+FROM amazonlinux:2
 
-FROM amazonlinux:${AMAZONLINUX_VERSION}
+ARG USER_NAME=user
+ARG USER_PW=user
 
-RUN amazon-linux-extras install -y
+ENV USER_NAME=${USER_NAME}
 
-RUN yum update -y && \
+RUN amazon-linux-extras install -y && \
+    yum update -y && \
     yum install -y \
-    sudo \
-    vim \
     curl \
     git \
-    tar
+    sudo \
+    tar \
+    vim && \
+    yum clean all && \
+    rm -rf /var/cache/yum
 
-ARG UNAME=user
-ARG PW=user
+RUN useradd ${USER_NAME} && \
+    echo ${USER_NAME}:${USER_PW} | chpasswd && \
+    echo '${USER_NAME} ALL=NOPASSWD: ALL' >> /etc/sudoers
 
-ENV UNAME=${UNAME}
-
-RUN useradd ${UNAME} && \
-    echo ${UNAME}:${PW} | chpasswd && \
-    echo "${UNAME} ALL=NOPASSWD: ALL" >> /etc/sudoers
-
-USER ${UNAME}
-WORKDIR /home/${UNAME}
+USER ${USER_NAME}
+WORKDIR /home/${USER_NAME}

@@ -1,15 +1,14 @@
 # **java-eclipse-temurin-of-bind-mount**
 # 概要
-Java(eclipse-temurin)の開発環境をDockerコンテナで作成する。(バインドマウントあり)  
-※Javaのバージョンはコンテナ作成時に指定する。  
-<br>
-バインドマウント先
-- ホスト：${リポジトリをクローンするディレクトリ}/bind-mount/java-eclipse-temurin-of-bind-mount
-- コンテナ：/bind-mount  
+Java(eclipse-temurin)の開発環境をDockerコンテナで作成する。(バインドマウントあり。)  
+※Javaのバージョンはコンテナ作成時に指定する。
+## バインドマウント先
+- ホスト： `utils-docker-container/java-eclipse-temurin-of-bind-mount/bind-mount`
+- コンテナ： `/root/bind-mount`
 
 # 前提条件
 - 以下がインストール済みであること。
-    - WSL2(Ubuntu)
+    - WSL 2(Ubuntu)
     - Docker Engine
     - Docker Compose
 - 作業の実施場所がLinux上であること。(/mnt/c配下ではないこと。)
@@ -30,30 +29,19 @@ chmod 744 ./set-env.sh
 ```
 ### シェルスクリプト実行
 引数により以下の設定ができる。(特に気にしない場合は引数なしで実行する。)
-- 第1引数：Javaのバージョン(デフォルト：latest)  
-※コンテナのイメージタグで使用するため、[こちら](https://hub.docker.com/_/eclipse-temurin/tags)に記載のタグであれば何を引数に指定しても良い。
+- 第1引数：Javaのバージョン(デフォルト： `21` )  
+  ※コンテナのイメージタグで使用するため、[Docker Hub](https://hub.docker.com/)に記載のタグであれば何を引数に指定しても良い。
 
-次は、Java 11の開発環境を構築するときの例になる。
+次はJava 11の開発環境を構築するときの例になる。
 ```console
 sh ./set-env.sh 11
 ```
-## Dockerを起動
-```console
-sudo service docker start
-```
-## コンテナの作成と起動
-```console
-docker compose up -d
-```
-## コンテナに入る
-### docker composeコマンドを使用
-```console
-docker compose exec -it java-eclipse-temurin-of-bind-mount /bin/bash
-```
-### dockerコマンドを使用
-```console
-docker exec -it java-eclipse-temurin-of-bind-mount-container /bin/bash
-```
+## Dockerコンテナの使用
+[こちらの"備考 > Dockerで使用する基本的なコマンド"](../README.md)に記載されている下記の項目を実施する。
+- serviceコマンド > Dockerの起動
+- docker composeコマンド > コンテナの作成と起動
+- docker composeコマンド > コンテナに入る  
+  ※"dockerコマンド > コンテナに入る"でも良い。
 
 # 備考
-その他、Dockerで使用する基本的なコマンドについては、[こちらの"備考 > Dockerで使用する基本的なコマンド"](../README.md)を参照。
+その他、Dockerで使用する基本的なコマンドについては、[こちらの"備考 > Dockerで使用する基本的なコマンド"](../README.md)を参照する。
